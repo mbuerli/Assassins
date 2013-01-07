@@ -1,2 +1,7 @@
-require ::File.join( ::File.dirname(__FILE__), 'app' )
-run MyApp.new
+require "rubygems"
+require "bundler"
+
+Bundler.require
+
+require "./app"
+run Assassins.new

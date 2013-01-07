@@ -1,6 +1,6 @@
 # encoding: utf-8
 require_relative 'partials'
-MyApp.helpers PartialPartials
+Assassins.helpers PartialPartials
 
 require_relative 'nicebytes'
-MyApp.helpers NiceBytes
+Assassins.helpers NiceBytes

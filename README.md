@@ -1,12 +1,13 @@
-#Assassins
-##Requirements
-    Ruby >= 1.9.2 (check with ruby -v) 
-    
-    Gems (gem install)
-        sinatra
-        data_mapper
+Assassins
+==================================
 
-##Running the site
-    ```
-    rackup config.ru
-    ```
+Run locally
+-----------
+
+Install dependencies:
+
+    bundle install
+
+Launch the app with [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html):
+
+    foreman start
