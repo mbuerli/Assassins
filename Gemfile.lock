@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.2.7)
     bcrypt-ruby (3.0.1)
+    certified (0.1.1)
     crack (0.1.8)
     daemons (1.1.3)
     data_mapper (1.2.0)
@@ -86,6 +87,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  certified
   data_mapper
   data_objects
   dm-aggregates
