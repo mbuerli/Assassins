@@ -5,12 +5,18 @@ class Assassins < Sinatra::Application
         @graph  = Koala::Facebook::API.new(session[:access_token])
 
         # Get public details of current application
-        @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+        begin
+            @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+        rescue Exception => e
+            session[:access_token] = nil
+            @graph  = Koala::Facebook::API.new(session[:access_token])
+            @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+        end
 
         if session[:access_token]
             @user    = @graph.get_object("me")
-            @friends = @graph.get_connections('me', 'friends')
-            @photos  = @graph.get_connections('me', 'photos')
+            @friends = @graph.get_connections('me', 'friends').first(4)
+            @photos  = @graph.get_connections('me', 'photos').first(4)
             @likes   = @graph.get_connections('me', 'likes').first(4)
 
             # for other data you can always run fql
