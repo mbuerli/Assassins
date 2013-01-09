@@ -1,7 +1,7 @@
 Assassins
 ==================================
 
-Facebook Webapp for hosting games of [Assassin]("http://en.wikipedia.org/wiki/Assassin_(game)").
+Facebook Webapp for hosting games of [Assassin](http://en.wikipedia.org/wiki/Assassin_%28game%29).
 
 Design
 ------
