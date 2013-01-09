@@ -1,3 +1,3 @@
 require_relative 'init'
 
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!

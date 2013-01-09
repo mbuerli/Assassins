@@ -8,6 +8,12 @@ class Assassins < Sinatra::Application
             # Get public details of current application
             @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
             @user    = @graph.get_object("me")
+
+            @profile = Profile.get(@user['id'])
+            if !@profile
+                @profile = Profile.create id: @user['id'], name: @user['name'], nickname: @user['name']
+            end
+
             @friends = @graph.get_connections('me', 'friends')
             @photos  = @graph.get_connections('me', 'photos')
             @likes   = @graph.get_connections('me', 'likes').first(4)
