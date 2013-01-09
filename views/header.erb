@@ -6,13 +6,17 @@
           <nav class="nav-header">
             <ul class="nav-list">
               <li class="nav-item" >
-                <a class="nav-link" href="/features">Features</a>
+                <a class="nav-link" href="/news">News</a>
               </li>
               <li class="nav-item" >
-                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="/rules">Rules</a>
               </li>
               <li class="nav-item" >
-                <a class="nav-link" href="/stuff">Stuff</a>
+                <% if @user %>
+                <a class="nav-link" href="/target">Target</a>
+                <% else %>
+                <a class="nav-link" href="/about">About</a>
+                <% end %>
               </li>
               <li class="nav-item" >
                 <% if @user %>
