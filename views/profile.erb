@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
   <head>
-  <%= render("erb", File.read("views/header.erb")) %>
+  <%= render("erb", File.read("views/head.erb")) %>
   </head>
   <body>
     <%= render("erb", File.read("views/facebody.erb")) %>
-    
-    <header class="clearfix">
+    <%= render("erb", File.read("views/header.erb")) %>
+
+    <section class="clearfix">
       <% if @user %>
           <p id="picture" style="background-image: url(https://graph.facebook.com/<%= @user['id'] %>/picture?type=normal)"></p>
           <div>
@@ -45,7 +46,7 @@
         </div>
 
       <% end %>
-    </header>
+    </section>
 
     <% if @user %>
       <section id="samples" class="clearfix">

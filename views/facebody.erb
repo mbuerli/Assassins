@@ -1,3 +1,4 @@
+<%# Facebook Body Components%>
 <div id="fb-root"></div>
 <script type="text/javascript">
   window.fbAsyncInit = function() {
@@ -5,7 +6,7 @@
       appId      : "<%= @app['id'] %>",                     // App ID
       channelUrl : "<%= url_no_scheme('/channel.html') %>", // Channel File
       status     : true,                                    // check login status
-      cookie     : true,                                    // enable cookies to allow the server to access the session
+      cookie     : true,                                    // enable cookies
       xfbml      : true                                     // parse XFBML
     });
 
