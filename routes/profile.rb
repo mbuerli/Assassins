@@ -9,9 +9,13 @@ class Assassins < Sinatra::Application
             @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
             @user    = @graph.get_object("me")
 
-            @profile = Profile.get(@user['id'])
-            if !@profile
-                @profile = Profile.create id: @user['id'], name: @user['name'], nickname: @user['name']
+            begin
+                @profile = Profile.get(@user['id'])
+                if !@profile
+                    @profile = Profile.create id: @user['id'], name: @user['name']
+                end
+            rescue Exception => e
+                # database troubles
             end
 
             @friends = @graph.get_connections('me', 'friends')
