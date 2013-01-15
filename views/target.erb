@@ -6,6 +6,15 @@
   <body>
     <%= render("erb", File.read("views/facebody.erb")) %>
     <%= render("erb", File.read("views/header.erb")) %>
-    <div><h1>Assassin(the game)</h1></div>
+    <h1> You are not a part of any game yet. </h1>
+    <% if @game %>
+      <% @games.each do |game| %>
+        <li>
+          <a href="/game/<%= game['id'] %>">
+            <%= game['name'] %>
+          </a>
+        </li>
+      <% end %>
+    <% end %>
   </body>
 </html>

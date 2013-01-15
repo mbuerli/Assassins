@@ -23,10 +23,10 @@ class Assassins < Sinatra::Application
 	configure :development do
 		set :css_files, MinifyResources::CSS_FILES
 		set :js_files,  MinifyResources::JS_FILES
-		require_relative 'models/migrate'
+		# require_relative 'models/migrate'
 	end
 
-	FACEBOOK_SCOPE = 'user_likes,user_photos,user_photo_video_tags'
+	FACEBOOK_SCOPE = 'user_likes,user_photos'
 
 	# before do
 	#   # HTTPS redirect

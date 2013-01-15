@@ -22,6 +22,7 @@ body {
   color: #FFFFFF;
   font: 14px/1.5em "Lucida Grande", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  min-height: 800px;
   margin:0; 
   padding:0;
 }
@@ -37,10 +38,12 @@ a:hover, a:active {
 }
 
 h1 {
-  color: #4595D3;
+  color: #FFFFFF;
+  text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px;
-  font-weight: normal;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px;
 }
 
 /* ------------------------------------------ */
@@ -58,6 +61,7 @@ header {
   text-align: right;
   top: 0;
   width: 100%;
+  margin-bottom: 10px;
   z-index: 1000;
 }
 
