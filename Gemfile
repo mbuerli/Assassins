@@ -1,6 +1,7 @@
 source :gemcutter
 
 gem "sinatra"
+gem "foreman"
 gem "koala"
 gem "json"
 gem "httparty"

@@ -19,23 +19,41 @@ Rules - Yep, we have rules.
 
 Dev page - Join the development
 
-Instructions for mac
+Requirements
+------------
+
+Ruby 1.9.3
+
+Bundler gem
+
+sqlite3
+
+Check your ruby version:
+    
+    ruby -v
+
+List your gems:
+    
+    gem list
+
+
+Instructions for Mac
 --------------------
-download brew by typing the following in a terminal
 
-ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+Download and install brew:
 
-Then download RVM by typing the following in a terminal
+    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
 
-\curl -L https://get.rvm.io | bash -s stable --ruby
+Download and install RVM:
 
-follow the instructions after wards if you need to do further commands after downloading RVM
+```\curl -L https://get.rvm.io | bash -s stable --ruby```
 
-Install foreman by typing the following in a terminal
+Follow the instructions afterwards (may need other pkgs, 'source' new ruby version). Make sure your system is using the correct Ruby version (or higher); you may need additional rvm installs to do this.
 
-gem install foreman
+Install bundler:
 
-Then follow the instructions on "Run locally"
+    gem install bundler
+
 
 Run locally
 -----------
