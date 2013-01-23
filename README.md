@@ -22,11 +22,9 @@ Dev page - Join the development
 Requirements
 ------------
 
-Ruby 1.9.3
-
-Bundler gem
-
-sqlite3
+* Ruby 1.9.3
+* Bundler gem
+* sqlite3
 
 Check your ruby version:
     
