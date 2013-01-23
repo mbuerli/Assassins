@@ -21,7 +21,21 @@ Dev page - Join the development
 
 Instructions for mac
 --------------------
-blah
+download brew by typing the following in a terminal
+
+ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+
+Then download RVM by typing the following in a terminal
+
+\curl -L https://get.rvm.io | bash -s stable --ruby
+
+follow the instructions after wards if you need to do further commands after downloading RVM
+
+Install foreman by typing the following in a terminal
+
+gem install foreman
+
+Then follow the instructions on "Run locally"
 
 Run locally
 -----------
