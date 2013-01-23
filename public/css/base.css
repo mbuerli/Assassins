@@ -46,6 +46,25 @@ h1 {
   padding: 10px;
 }
 
+.tab {
+  background: #222;
+}
+
+.wrapper {
+  width: 960px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.thin-wrapper {
+  width: 720px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto
+}
+
+
 /* #posts
 --------------------------------------------- */
 ol {
@@ -91,6 +110,50 @@ li {
 #posts.shadow .post {
   -webkit-box-shadow: 0 0 25px 2px rgba(0,0,0,0.7)!important;
   box-shadow: 0 0 25px 2px rgba(0,0,0,0.7)!important;
+}
+
+/* =card
+--------------------------------------------- */
+.card {
+  background: #000;
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
+  -o-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+/* =profile
+--------------------------------------------- */
+#profile {
+  height: 171px;
+}
+
+#profile #info h1 {
+  text-align: left;
+  padding-left: 8px;
+  padding-bottom: 8px;
+}
+
+#profile #info h2 {
+  padding-left: 8px;
+  padding-bottom: 20px;
+}
+
+#profile img {
+  float: left;
+  width: 200px;
+  height: 171px;
+}
+
+#profile #info {
+  float: left;
+  margin: 10px;
+}
+
+#friends li {
+  display: inline;
 }
 
 /* =header

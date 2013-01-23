@@ -6,13 +6,20 @@
   <body>
     <%= render("erb", File.read("views/facebody.erb")) %>
     <%= render("erb", File.read("views/header.erb")) %>
-    <div><h1>Assassin(the game)</h1></div>
-    <ol id="posts" class="clearfix shadow">
+    <div class="wrapper">
+      <div><h1>Assassin(the game)</h1></div>
+      <ol id="posts" class="clearfix shadow">
         <li class="post">
-            <div>
-                <h1>HELLO World</h1>
-            </div>
+          <div>
+            <h1>Hello World</h1>
+          </div>
         </li>
-    </ol>
+        <li class="post">
+          <div>
+            <h1>This is a Test</h1>
+          </div>
+        </li>
+      </ol>
+    </div>
   </body>
 </html>

@@ -9,92 +9,49 @@
 
     <section class="clearfix">
       <% if @user %>
-        <div>
-          <img src="https://graph.facebook.com/<%= @profile['id'] %>/picture?type=normal"/>
-          <h1><strong><%= @profile['nickname'] %></strong> (<%= @profile['name'] %>)</h1>
-          <div id="share-app">
-            <p>Share your app:</p>
+        <div class="thin-wrapper">
+          <div id="profile" class="card">
+            <img src="https://graph.facebook.com/<%= @profile['id'] %>/picture?type=large"/>
+            <div id="info">
+              <h1><strong><%= @profile['nickname'] %></strong> (<%= @profile['name'] %>)</h1>
+              <h2>Assassin in training</h2>
+              <div id="share-app">
+                <ul>
+                  <li>
+                    <a href="#" class="facebook-button" id="postToWall" data-url="<%= url %>">
+                      <span class="plus">Post to Wall</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= url %>">
+                      <span class="speech-bubble">Send Message</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
+                      <span class="apprequests">Send Requests</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab">
+            <h2>Friends</h2>
+          </div>
+          <div id="friends" class="card">
             <ul>
-              <li>
-                <a href="#" class="facebook-button" id="postToWall" data-url="<%= url %>">
-                  <span class="plus">Post to Wall</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= url %>">
-                  <span class="speech-bubble">Send Message</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
-                  <span class="apprequests">Send Requests</span>
-                </a>
-              </li>
+              <% @friends_using_app.each do |friend_result| %>
+                <li>
+                  <a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">
+                    <img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">
+                  </a>
+                </li>
+              <% end %>
             </ul>
           </div>
         </div>
       <% end %>
     </section>
-
-    <% if @user %>
-      <section id="samples" class="clearfix">
-        <h1>Examples of the Facebook Graph API</h1>
-
-        <div class="list">
-          <h3>A few of your friends</h3>
-          <ul class="friends">
-            <% @friends.each do |friend| %>
-              <li>
-                <a href="#" onclick="window.open('http://www.facebook.com/<%= friend['id']%>')">
-                  <img src="https://graph.facebook.com/<%= friend['id'] %>/picture?type=square" alt="<%= friend['name'] %>">
-                  <%= friend['name'] %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-
-        <div class="list inline">
-          <h3>Recent photos</h3>
-          <ul class="photos">
-            <% @photos.each_with_index do |photo, index| %>
-              <li style="background-image: url(<%= photo['picture'] %>)" class='<%= 'first-column' if (index%4).zero? %>'>
-                <a href="#" onclick="window.open('http://www.facebook.com/<%= photo['id'] %>')">
-                  <%= photo['name'] %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-
-        <div class="list">
-          <h3>Things you like</h3>
-          <ul class="things">
-            <% @likes.each do |like| %>
-              <li>
-                <a href="#" onclick="window.open('http://www.facebook.com/<%= like['id'] %>')">
-                  <img src="https://graph.facebook.com/<%= like['id'] %>/picture?type=square" alt="<%= like['name'] %>">
-                  <%= like['name'] %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-
-        <div class="list">
-          <h3>Friends using this app</h3>
-          <ul class="friends">
-            <% @friends_using_app.each do |friend_result| %>
-              <li>
-                <a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">
-                  <img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">
-                  <%= friend_result['name'] %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </section>
-    <% end %>
   </body>
 </html>
