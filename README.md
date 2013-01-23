@@ -19,6 +19,10 @@ Rules - Yep, we have rules.
 
 Dev page - Join the development
 
+Instructions for mac
+--------------------
+blah
+
 Run locally
 -----------
 
