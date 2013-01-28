@@ -19,8 +19,8 @@ class Assassins < Sinatra::Application
             game.name = params[:name]
             game.text = params[:text]
             unless game.id
-              #game.date = Time.now
-              #game.link = to_link params[:title]
+                game.creationDate = Time.now
+                game.createdBy = @user['id']
             end
             if params[:action] == 'save'
               game.save
