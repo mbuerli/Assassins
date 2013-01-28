@@ -1,0 +1,20 @@
+<section class="admin">
+    <h1>Game</h1>
+    <form id="post" method="post" action="/game">
+        <input type="hidden" name="id" value="<%= @game.id %>" />
+        <div>
+            <input type="text" name="name" value="<%= @game.name %>" placeholder="Name"/>
+        </div>
+        <div>
+            <textarea name="text" rows="20" cols="40" placeholder="Write here..."><%= @game.text %></textarea>
+        </div>
+        <button type="submit" name="action" value="preview">Preview</button>
+        <button type="submit" name="action" value="save">Save</button>
+    </form>
+    <% if @game.id %>
+        <form id="delete" method="post" action="/game/<%= @game.id %>">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit">Delete</button>
+        </form>
+    <% end %>
+</section>

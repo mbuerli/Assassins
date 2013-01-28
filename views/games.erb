@@ -7,14 +7,15 @@
     <%= render("erb", File.read("views/facebody.erb")) %>
     <%= render("erb", File.read("views/header.erb")) %>
     <h1> You are not a part of any game yet. </h1>
-    <% if @game %>
+    <ol id="posts" class="clearfix shadow">
       <% @games.each do |game| %>
-        <li>
-          <a href="/game/<%= game['id'] %>">
-            <%= game['name'] %>
-          </a>
+        <li class="post">
+          <div>
+            <a href="/game/<%= game['id'] %>"><%= game['name'] %></a>
+            <%= game['text'] %>
+          </div>
         </li>
       <% end %>
-    <% end %>
+    </ol>
   </body>
 </html>

@@ -3,5 +3,6 @@ class Game
     
     property :id,       Serial, key: true, unique_index: true 
     property :name,     String
-    # has n,   :assassins, 'Profile', :required => false
+    property :text,     String
+    #has n,   :assassins, 'Profile', :required => false
 end
