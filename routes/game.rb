@@ -23,11 +23,16 @@ class Assassins < Sinatra::Application
                 game.createdBy = @user['id']
             end
             if params[:action] == 'save'
-              game.save
-              redirect "/games"
+                if game.save
+                else
+                    game.errors.each do |e|
+                        puts e
+                    end
+                end
+                redirect "/games"
             elsif params[:action] == 'preview'
-              @games = [] << game
-              erb :games
+                @games = [] << game
+                erb :games
             end
         end
     end

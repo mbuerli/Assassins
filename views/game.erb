@@ -16,5 +16,13 @@
             <input type="hidden" name="_method" value="delete" />
             <button type="submit">Delete</button>
         </form>
+        <% @game.profiles.each do |profile| %>
+            <li class="post">
+                <div>
+                  <%= profile['name'] %>
+                </div>
+            </li>
+        <% end %>
     <% end %>
+    
 </section>

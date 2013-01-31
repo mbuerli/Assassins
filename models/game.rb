@@ -1,12 +1,12 @@
 class Game 
     include DataMapper::Resource
     
-    property :id,           Serial, key: true, unique_index: true 
+    property :id,           Serial
     property :name,         String
     property :text,         String
     property :creationDate, DateTime
-    property :createdBy,    String
+    property :createdBy,    Integer
     property :startDate,    DateTime
     property :endDate,      DateTime
-    has n,   :assassins, 'Profile', :required => false
+    has n,   :profiles,     :through => Resource
 end

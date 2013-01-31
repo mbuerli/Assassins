@@ -7,7 +7,7 @@ class Assassins < Sinatra::Application
 
             # Get public details of current application
             @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
-            @user    = @graph.get_object("me")
+            @user = @graph.get_object("me")
 
             begin
                 @profile = Profile.get(@user['id'])

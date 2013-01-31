@@ -8,11 +8,27 @@
     <%= render("erb", File.read("views/header.erb")) %>
     <h1> You are not a part of any game yet. </h1>
     <ol id="posts" class="clearfix shadow">
+      <% if @profile %>
+        <% @profile.games.each do |game| %>
+         <li class="post">
+            <div>
+              <a href="/game/<%= game['id'] %>"><%= game['name'] %></a>
+              <%= game['text'] %> "Joined"
+            </div>
+          </li>
+        <% end %>
+      <% end %>
       <% @games.each do |game| %>
         <li class="post">
           <div>
             <a href="/game/<%= game['id'] %>"><%= game['name'] %></a>
             <%= game['text'] %>
+            <form id="join" method="post" action="/games">
+              <input type="hidden" name="id" value="<%= game['id'] %>" />
+              <input type="hidden" name="uid" value="<%= @user['id'] %>" />
+              <input type="hidden" name="name" value="<%= @user['name'] %>" />
+              <button type="submit" name="action" value="join">Join</button>
+            </form>
           </div>
         </li>
       <% end %>

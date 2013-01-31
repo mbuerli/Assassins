@@ -9,6 +9,7 @@ class Assassins < Sinatra::Application
             # Get public details of current application
             @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
             @user    = @graph.get_object("me")
+            @profile = Profile.get(@user['id'])
 
             begin
                 @games = Game.all
@@ -24,6 +25,14 @@ class Assassins < Sinatra::Application
 
     # used by Canvas apps - redirect the POST to be a regular GET
     post "/games" do
+        if params[:action] == 'join'
+            if params[:id]
+                profile = Profile.get(params[:uid]) || Profile.new(:id => params[:uid], :name => params[:name])
+                game = Game.get(params[:id])
+                profile.games << game
+                profile.save
+            end
+        end
         redirect "/games"
     end
 end
