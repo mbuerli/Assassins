@@ -1,3 +1,5 @@
+# Game construct, containing player profiles and other metadata
+
 class Game 
     include DataMapper::Resource
     

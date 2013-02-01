@@ -1,3 +1,6 @@
+# Metadata on a given user over an number of games
+# Keyed by UserID(facebookID)
+
 class Profile 
     include DataMapper::Resource
     
