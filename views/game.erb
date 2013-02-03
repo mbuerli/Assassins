@@ -16,11 +16,32 @@
             <input type="hidden" name="_method" value="delete" />
             <button type="submit">Delete</button>
         </form>
-        <% @game.profiles.each do |profile| %>
-            <h1>Players</h1>
+        <h2>Created By <%= @game.createdBy %> on <%= @game.creationDate %></h2>
+        <h1>Profiles</h1>
+        <% @game.profiles.each do |profile| %>   
             <li class="post">
                 <div>
                   <%= profile['name'] %>
+                </div>
+            </li>
+        <% end %>
+        <h1>Players</h1>
+        <% @game.players.each do |player| %>   
+            <li class="post">
+                <div>
+                    <%= player.id %>
+                    <% if player.target %>
+                        Target: <%= player.target.id %>
+                    <% end %>
+                    <% if player.assassin %>
+                        Assassin: <%= player.assassin.id %>
+                    <% end %>
+                    <% if player.friends %>
+                        Friends: 
+                        <% player.friends.each do |friend| %>
+                            <%= friend.id %>
+                        <% end %>
+                    <% end %>
                 </div>
             </li>
         <% end %>

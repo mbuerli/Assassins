@@ -1,12 +1,28 @@
 # encoding: utf-8
 
 class Assassins < Sinatra::Application
+    def join(gid, uid, name, graph)
+        if gid
+            profile = Profile.get(uid) || Profile.create(:id => uid, :name => name)
+            game = Game.get(gid)
+            if !profile.games.include? game
+                game.profiles << profile
+
+                #friends_using_app = graph.fql_query("SELECT uid, is_app_user FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
+                #uids_using_app = friends_using_app.select{|friend| friend['uid']}
+                friends = Player.all #.select{|player| player if !uids_using_app.include? player.id}
+                player = Player.new id: profile.id
+                player.friends += friends
+                player.save
+                game.players << player
+                game.save
+            end
+        end
+    end
+
     get "/games" do
         if session[:access_token]
-            # Get base API Connection
             @graph  = Koala::Facebook::API.new(session[:access_token])
-
-            # Get public details of current application
             @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
             @user    = @graph.get_object("me")
             @profile = Profile.get(@user['id']) || Profile.new(:id => @user['id'], :name => @user['name'])
@@ -20,19 +36,13 @@ class Assassins < Sinatra::Application
 
     # used by Canvas apps - redirect the POST to be a regular GET
     post "/games" do
+        graph = Koala::Facebook::API.new(session[:access_token])
+        user = graph.get_object("me")
+        
         if params[:action] == 'join'
-            if params[:id]
-                # Save game to profile
-                profile = Profile.get(params[:uid]) || Profile.new(:id => params[:uid], :name => params[:name])
-                game = Game.get(params[:id])
-                # Can only join once
-                if !profile.games.include? game
-                    profile.games << game
-                    profile.save
-                    # Create player
-                    player = Player.create uid: profile.id, gid: game.id
-                end
-            end
+            join(params[:id], user['id'], user['name'], graph)
+            join(params[:id], 4, 'Bob', graph)
+            join(params[:id], 7, 'Jeff', graph)
         end
         redirect "/games"
     end

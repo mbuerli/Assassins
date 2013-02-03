@@ -30,7 +30,7 @@
         <h1> There are no games in progress yet. </h1>
       <% end %>
     <% end %>
-    
+
     <% if !@games.empty? %>
       <ol id="posts" class="clearfix shadow">
         <% @games.each do |game| %>
@@ -40,8 +40,6 @@
               <%= game['text'] %>
               <form id="join" method="post" action="/games">
                 <input type="hidden" name="id" value="<%= game['id'] %>" />
-                <input type="hidden" name="uid" value="<%= @user['id'] %>" />
-                <input type="hidden" name="name" value="<%= @user['name'] %>" />
                 <button type="submit" name="action" value="join">Join</button>
               </form>
             </div>

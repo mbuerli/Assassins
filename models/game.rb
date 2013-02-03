@@ -11,4 +11,5 @@ class Game
     property :startDate,    DateTime
     property :endDate,      DateTime
     has n,   :profiles,     :through => Resource
+    has n,   :players
 end
