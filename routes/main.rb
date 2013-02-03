@@ -43,4 +43,8 @@ class Assassins < Sinatra::Application
         session[:access_token] = authenticator.get_access_token(params[:code])
         redirect '/'
     end
+
+    not_found do
+        redirect '/'
+    end
 end
