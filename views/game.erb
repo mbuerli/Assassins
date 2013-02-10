@@ -21,14 +21,8 @@
         <% @game.profiles.each do |profile| %>   
             <li class="post">
                 <div>
-                  <%= profile['name'] %>
-                </div>
-            </li>
-        <% end %>
-        <h1>Players</h1>
-        <% @game.players.each do |player| %>   
-            <li class="post">
-                <div>
+                    <%= profile['name'] %>
+                    <% player = Player.get(profile.id, @game.id) %>
                     <%= player.id %>
                     <% if player.target %>
                         Target: <%= player.target.id %>

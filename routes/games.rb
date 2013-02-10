@@ -7,15 +7,14 @@ class Assassins < Sinatra::Application
             game = Game.get(gid)
             if !profile.games.include? game
                 game.profiles << profile
+                game.save
 
                 #friends_using_app = graph.fql_query("SELECT uid, is_app_user FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
                 #uids_using_app = friends_using_app.select{|friend| friend['uid']}
                 friends = Player.all #.select{|player| player if !uids_using_app.include? player.id}
-                player = Player.new id: profile.id
+                player = Player.new id: profile.id, game: gid
                 player.friends += friends
                 player.save
-                game.players << player
-                game.save
             end
         end
     end

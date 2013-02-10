@@ -20,12 +20,12 @@ class Player
 
     include DataMapper::Resource
 
-    property :id,       Serial, key: true, unique_index: true
-    belongs_to :game
+    property :id,       Integer, key: true
+    property :game,     Integer, key: true
 
-    has 1, :target_link, 'Player::Target', :child_key => [:assassin_id]
-    has 1, :assassin_link, 'Player::Target', :child_key => [:target_id]
-    has n, :friendships, 'Player::Friend', :child_key => [ :assassin_id ]
+    has 1, :target_link, 'Player::Target', :child_key => [:assassin_id, :assassin_game]
+    has 1, :assassin_link, 'Player::Target', :child_key => [:target_id, :target_game]
+    has n, :friendships, 'Player::Friend', :child_key => [:assassin_id, :assassin_game]
 
     has 1, :target, self, :through => :target_link, :via => :target
     has 1, :assassin, self, :through => :assassin_link, :via => :assassin
