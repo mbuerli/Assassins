@@ -14,7 +14,7 @@
 <title><%= @app['name'] %></title>
 
 <%# -----StyleSheets----- %>
-<link rel="stylesheet" href="css/screen.css" media="Screen" type="text/css" />
+<link rel="stylesheet" href="<%= url %>/css/screen.css" media="Screen" type="text/css" />
 <!--[if IEMobile]>
 <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
 <![endif]-->
@@ -33,6 +33,7 @@
     $('#postToWall').click(function() {
       FB.ui(
         {
+          message : 'I am developing this webApp!',
           method : 'feed',
           link   : $(this).attr('data-url')
         },
@@ -49,7 +50,7 @@
       FB.ui(
         {
           method : 'send',
-          link   : $(this).attr('data-url')
+          link   : "<%= url %>"
         },
         function (response) {
           // If response is null the user canceled the dialog
@@ -64,7 +65,7 @@
       FB.ui(
         {
           method  : 'apprequests',
-          message : $(this).attr('data-message')
+          message : 'Join me in a game of Assassin'
         },
         function (response) {
           // If response is null the user canceled the dialog

@@ -11,10 +11,22 @@
       <% if @user %>
         <div class="thin-wrapper">
           <div id="profile" class="card">
-            <img src="https://graph.facebook.com/<%= @profile['id'] %>/picture?type=large"/>
+            <img id="pic" src="https://graph.facebook.com/<%= @profile['id'] %>/picture?type=large"/>
             <div id="info">
-              <h1><strong><%= @profile['nickname'] %></strong> (<%= @profile['name'] %>)</h1>
+              <div id="name">
+                <% if @editing %>
+                  <form method="post" action="/profile">
+                  <input type="text" name="nickname" value="<%= @profile['nickname'] %>" />
+                  <button type="submit" name="action" value="edit">Save</button>
+                  </form>
+                <% else %>
+                  <h1><strong><%= @profile['nickname'] %></strong> (<%= @profile['name'] %>)</h1>
+                  <a href="profile/edit"><span class="edit-button"></span></a>
+                <% end %>
+              </div>
+              <div>
               <h2>Assassin in training</h2>
+              </div>
               <div id="share-app">
                 <ul>
                   <li>
@@ -36,20 +48,22 @@
               </div>
             </div>
           </div>
-          <div class="tab">
-            <h2>Friends</h2>
-          </div>
-          <div id="friends" class="card">
-            <ul>
-              <% @friends_using_app.each do |friend_result| %>
-                <li>
-                  <a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">
-                    <img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+          <% if @friends_using_app %>
+            <div class="tab">
+              <h2>Friends</h2>
+            </div>
+            <div id="friends" class="card">
+              <ul>
+                <% @friends_using_app.each do |friend_result| %>
+                  <li>
+                    <a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">
+                      <img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </section>
