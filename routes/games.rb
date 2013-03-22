@@ -37,11 +37,13 @@ class Assassins < Sinatra::Application
     post "/games" do
         graph = Koala::Facebook::API.new(session[:access_token])
         user = graph.get_object("me")
-        
+        friends_using_app = graph.fql_query("SELECT uid, name FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
+
         if params[:action] == 'join'
             join(params[:id], user['id'], user['name'], graph)
-            join(params[:id], 4, 'Bob', graph)
-            join(params[:id], 7, 'Jeff', graph)
+            friends_using_app.each do |friend|
+                join(params[:id], friend['uid'], friend['name'], graph)
+            end
         end
         redirect "/games"
     end

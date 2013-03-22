@@ -1,9 +1,16 @@
 # encoding: utf-8
 
 class Assassins < Sinatra::Application
-    get "/game/new" do        
-        @game = Game.new
-        erb :game
+    get "/game/new" do  
+        if session[:access_token]
+            @graph = Koala::Facebook::API.new(session[:access_token])
+            @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+            @user = @graph.get_object("me")      
+            @game = Game.new
+            erb :game
+        else
+            redirect "/"
+        end
     end
 
     post '/game' do
@@ -39,7 +46,14 @@ class Assassins < Sinatra::Application
 
     get '/game/:id' do
         @game = Game.get(params[:id])
-        erb :game
+        if session[:access_token] && @game
+            @graph = Koala::Facebook::API.new(session[:access_token])
+            @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+            @user = @graph.get_object("me")  
+            erb :game
+        else
+            redirect "/"
+        end
     end
 
     delete '/game/:id' do

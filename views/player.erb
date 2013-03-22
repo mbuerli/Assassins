@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+  <head>
+  <%= render("erb", File.read("views/head.erb")) %>
+  </head>
+  <body>
+    <%= render("erb", File.read("views/facebody.erb")) %>
+    <%= render("erb", File.read("views/header.erb")) %>
+    <div class="wrapper">
+      <ol id="posts" class="clearfix shadow">
+        <li class="post">
+          <div>
+            <a href="/game/<%= @game.id %>"><div id="back-button">Game</div></a>
+            <h1><%= @profile['name'] %>(<%= @player.id %>)</h1>
+            <form id="target" method="post" action="/game/<%= @game.id %>/<%= @player.id %>">
+            <% if @player.target %>
+              <p>Target: <%= @player.target.id %></p>
+              <button type="submit" name="action" value="remove">Remove</button>
+            <% else %>
+              <p>Target:</p>
+              <input type="text" name="target" placeholder="target"/>
+              <button type="submit" name="action" value="set">Set</button>
+              <% if @targets %>
+              <p>Available Targets: 
+                <% @targets.each do |target| %>
+                    <%= target.id %>
+                <% end %>
+              </p>
+              <% end %>
+            <% end %>
+            </form>
+            <% if @player.assassin %>
+            <p>Assassin: <%= @player.assassin.id %></p>
+            <% end %>
+            <% if @player.friends %>
+            <p>Friends: 
+                <% @player.friends.each do |friend| %>
+                    <%= friend.id %>
+                <% end %>
+            </p>
+            <% end %>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>

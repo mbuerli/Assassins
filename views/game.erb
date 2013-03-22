@@ -1,6 +1,15 @@
-<section class="admin">
-    <h1>Game</h1>
-    <form id="post" method="post" action="/game">
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+  <head>
+  <%= render("erb", File.read("views/head.erb")) %>
+  </head>
+  <body>
+    <%= render("erb", File.read("views/facebody.erb")) %>
+    <%= render("erb", File.read("views/header.erb")) %>
+    
+    <section class="clearfix wrapper">
+      <h1>Game</h1>
+      <form id="post" method="post" action="/game">
         <input type="hidden" name="id" value="<%= @game.id %>" />
         <div>
             <input type="text" name="name" value="<%= @game.name %>" placeholder="Name"/>
@@ -10,35 +19,22 @@
         </div>
         <button type="submit" name="action" value="preview">Preview</button>
         <button type="submit" name="action" value="save">Save</button>
-    </form>
-    <% if @game.id %>
+      </form>
+      <% if @game.id %>
         <form id="delete" method="post" action="/game/<%= @game.id %>">
             <input type="hidden" name="_method" value="delete" />
             <button type="submit">Delete</button>
         </form>
-        <h2>Created By <%= @game.createdBy %> on <%= @game.creationDate %></h2>
-        <h1>Profiles</h1>
+        <h2>Created<% if (creator = Profile.get(@game.createdBy)) %>by <%= creator.name %><% end %> on <%= @game.creationDate %></h2>
+        <h1>Players</h1>
         <% @game.profiles.each do |profile| %>   
-            <li class="post">
-                <div>
+            <li>
+                <a href="<%= @game.id %>/<%= profile.id %>">
                     <%= profile['name'] %>
-                    <% player = Player.get(profile.id, @game.id) %>
-                    <%= player.id %>
-                    <% if player.target %>
-                        Target: <%= player.target.id %>
-                    <% end %>
-                    <% if player.assassin %>
-                        Assassin: <%= player.assassin.id %>
-                    <% end %>
-                    <% if player.friends %>
-                        Friends: 
-                        <% player.friends.each do |friend| %>
-                            <%= friend.id %>
-                        <% end %>
-                    <% end %>
-                </div>
+                </a>
             </li>
         <% end %>
-    <% end %>
-    
-</section>
+      <% end %>
+    </section>
+  </body>
+</html>
