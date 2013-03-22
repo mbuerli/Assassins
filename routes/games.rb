@@ -24,7 +24,7 @@ class Assassins < Sinatra::Application
             @graph  = Koala::Facebook::API.new(session[:access_token])
             @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
             @user    = @graph.get_object("me")
-            @profile = Profile.get(@user['id']) || Profile.new(:id => @user['id'], :name => @user['name'])
+            @profile = Profile.get(@user['id']) || Profile.create(:id => @user['id'], :name => @user['name'])
             @games = Game.all.select{|game| game if !@profile.games.include? game}
 
             erb :games
@@ -33,10 +33,10 @@ class Assassins < Sinatra::Application
         end
     end
 
-    # used by Canvas apps - redirect the POST to be a regular GET
     post "/games" do
         graph = Koala::Facebook::API.new(session[:access_token])
         user = graph.get_object("me")
+        # For testing 
         friends_using_app = graph.fql_query("SELECT uid, name FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
 
         if params[:action] == 'join'

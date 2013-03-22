@@ -20,6 +20,7 @@ class Assassins < Sinatra::Application
         player = Player.get(params[:uid], params[:id])
         if params[:action] == 'set'
             player.target = Player.get(params[:target], params[:id])
+            player.code = "1234"
         end
         if params[:action] == 'remove'
             player.target = nil

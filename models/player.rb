@@ -22,6 +22,7 @@ class Player
 
     property :id,       Integer, key: true
     property :game,     Integer, key: true
+    property :code,     String
 
     has 1, :target_link, 'Player::Target', :child_key => [:assassin_id, :assassin_game]
     has 1, :assassin_link, 'Player::Target', :child_key => [:target_id, :target_game]

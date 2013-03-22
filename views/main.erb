@@ -13,6 +13,27 @@
             <h1>In Development</h1>
           </div>
         </li>
+        <% if @players %>
+          <% @players.each do |player| %>
+          <% game = Game.get(player.game) %>
+            <li class="post">
+              <div>
+              <h1><%= game.name %></h1>
+              <% if player.target %>
+              <% target = Profile.get(player.target.id) %>
+              <h2><%= target.name %></h2>
+              <form id="kill" method="post" action="/kill">
+              <input type="text" name="killcode" placeholder="killcode"/>
+              <button type="submit" name="action" value="kill">Submit</button>
+              </form>
+              <% else %>
+              <h2>No target.</h2>
+              <% end %>
+              Your killcode: <%= player.code %>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
       </ol>
     </div>
   </body>

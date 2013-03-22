@@ -14,7 +14,8 @@ class Assassins < Sinatra::Application
         end
 
         if session[:access_token]
-            @user    = @graph.get_object("me")
+            @user = @graph.get_object("me")
+            @players = Player.all(:id => @user['id']); 
         end
         erb :main
     end
