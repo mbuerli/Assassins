@@ -30,6 +30,7 @@ class Assassins < Sinatra::Application
             if player.target && params[:killcode] == player.target.code
                 player.target.deaths += 1
                 player.kills += 1
+                player.past_targets += player.target
                 player.target = nil
             end
         end

@@ -39,6 +39,13 @@
                 <% end %>
             </p>
             <% end %>
+             <% if @player.past_targets %>
+            <p>Past Targets: 
+                <% @player.past_targets.each do |target| %>
+                    <%= target.id %>
+                <% end %>
+            </p>
+            <% end %>
             <p>Kills: <%= @player.kills %></p>
             <p>Deaths: <%= @player.deaths %></p>
           </div>

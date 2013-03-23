@@ -17,20 +17,20 @@
         <div>
             <textarea name="text" rows="20" cols="40" placeholder="Write here..."><%= @game.text %></textarea>
         </div>
-        <button type="submit" name="action" value="preview">Preview</button>
         <button type="submit" name="action" value="save">Save</button>
+        <% if @game.id %>
+        <button type="submit" name="action" value="delete">Delete</button>
+        <% end %>
       </form>
       <% if @game.id %>
-        <form id="delete" method="post" action="/game/<%= @game.id %>">
-            <input type="hidden" name="_method" value="delete" />
-            <button type="submit">Delete</button>
-        </form>
         <h2>Created<% if (creator = Profile.get(@game.createdBy)) %>by <%= creator.name %><% end %> on <%= @game.creationDate %></h2>
         <h1>Players</h1>
         <% @game.profiles.each do |profile| %>   
             <li>
                 <a href="/player/<%= @game.id %>/<%= profile.id %>">
                     <%= profile['name'] %>
+                    <% player = Player.get(profile.id,@game.id) %>
+                    <% if player && !player.target %>(Needs Target)<% end %>
                 </a>
             </li>
         <% end %>
