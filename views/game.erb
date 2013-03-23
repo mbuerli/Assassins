@@ -29,7 +29,7 @@
         <h1>Players</h1>
         <% @game.profiles.each do |profile| %>   
             <li>
-                <a href="<%= @game.id %>/<%= profile.id %>">
+                <a href="/player/<%= @game.id %>/<%= profile.id %>">
                     <%= profile['name'] %>
                 </a>
             </li>

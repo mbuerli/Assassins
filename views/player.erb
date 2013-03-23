@@ -12,7 +12,7 @@
           <div>
             <a href="/game/<%= @game.id %>"><div id="back-button">Game</div></a>
             <h1><%= @profile['name'] %>(<%= @player.id %>)</h1>
-            <form id="target" method="post" action="/game/<%= @game.id %>/<%= @player.id %>">
+            <form id="target" method="post">
             <% if @player.target %>
               <p>Target: <%= @player.target.id %></p>
               <button type="submit" name="action" value="remove">Remove</button>
@@ -39,6 +39,8 @@
                 <% end %>
             </p>
             <% end %>
+            <p>Kills: <%= @player.kills %></p>
+            <p>Deaths: <%= @player.deaths %></p>
           </div>
         </li>
       </ol>

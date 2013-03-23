@@ -22,7 +22,7 @@
               <% if player.target %>
               <% target = Profile.get(player.target.id) %>
               <h2><%= target.name %></h2>
-              <form id="kill" method="post" action="/kill">
+              <form id="kill" method="post" action="/player/<%= player.game %>/<%= player.id %>">
               <input type="text" name="killcode" placeholder="killcode"/>
               <button type="submit" name="action" value="kill">Submit</button>
               </form>
