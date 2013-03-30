@@ -9,31 +9,38 @@
     
     <section class="clearfix wrapper">
       <h1>Game</h1>
-      <form id="post" method="post" action="/game">
-        <input type="hidden" name="id" value="<%= @game.id %>" />
-        <div>
-            <input type="text" name="name" value="<%= @game.name %>" placeholder="Name"/>
-        </div>
-        <div>
-            <textarea name="text" rows="20" cols="40" placeholder="Write here..."><%= @game.text %></textarea>
-        </div>
-        <button type="submit" name="action" value="save">Save</button>
-        <% if @game.id %>
-        <button type="submit" name="action" value="delete">Delete</button>
-        <% end %>
-      </form>
+      <ol id="posts" class="clearfix shadow">
+        <li class="post">
+          <form id="post" method="post" action="/game">
+            <input type="hidden" name="id" value="<%= @game.id %>" />
+            <div>
+                <input type="text" name="name" value="<%= @game.name %>" placeholder="Name"/>
+            </div>
+            <div>
+                <textarea name="text" rows="10" cols="80" placeholder="Write here..."><%= @game.text %></textarea>
+            </div>
+            <button type="submit" name="action" value="save">Save</button>
+            <% if @game.id %>
+            <button type="submit" name="action" value="delete">Delete</button>
+            <h2>Created<% if (creator = Profile.get(@game.createdBy)) %>by <%= creator.name %><% end %> on <%= @game.creationDate %></h2>
+            <% end %>
+          </form>
+        </li>
+      </ol>
+
       <% if @game.id %>
-        <h2>Created<% if (creator = Profile.get(@game.createdBy)) %>by <%= creator.name %><% end %> on <%= @game.creationDate %></h2>
         <h1>Players</h1>
-        <% @game.profiles.each do |profile| %>   
-            <li>
-                <a href="/player/<%= @game.id %>/<%= profile.id %>">
-                    <%= profile['name'] %>
-                    <% player = Player.get(profile.id,@game.id) %>
-                    <% if player && !player.target %>(Needs Target)<% end %>
-                </a>
-            </li>
-        <% end %>
+        <ol id="posts" class="clearfix shadow">
+          <% @game.profiles.each do |profile| %>   
+              <li class="post">
+                  <a href="/player/<%= @game.id %>/<%= profile.id %>">
+                      <%= profile['name'] %>
+                      <% player = Player.get(profile.id,@game.id) %>
+                      <% if player && !player.target %>(Needs Target)<% end %>
+                  </a>
+              </li>
+          <% end %>
+        </ol>
       <% end %>
     </section>
   </body>

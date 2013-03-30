@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+  <head>
+  <%= render("erb", File.read("views/head.erb")) %>
+  </head>
+  <body>
+    <%= render("erb", File.read("views/facebody.erb")) %>
+    <%= render("erb", File.read("views/header.erb")) %>
+    <div class="wrapper">
+      <h1>Schedule</h1>
+      <form method="post" action="/profile/schedule">
+      <ol id="posts" class="clearfix shadow">
+        <% @profile.courses.each do |course| %>
+        <li class="post">
+          <div>
+            <strong><%= course.name %></strong>
+            <%= course.description %>
+            <%= course.location %>
+            <button type="submit" name="action" value="remove<%= course.id %>">Remove</button>
+          </div>
+        </li>
+        <% end %>
+         <li class="post">
+          <div>            
+            <input type="text" name="name" placeholder="Name"/>
+            <input type="text" name="description" placeholder="Description"/>
+            <input type="text" name="location" placeholder="Location"/>
+            <input type="text" name="daysOfWeek" placeholder="Days (Ex. MWF)"/>
+            <input type="text" name="startTime" placeholder="Start Time"/>
+            <input type="text" name="endTime" placeholder="End Time"/>
+            <button type="submit" name="action" value="add">Add</button>
+          </div>
+        </li>
+      </ol>
+      </form>
+    </div>
+  </body>
+</html>

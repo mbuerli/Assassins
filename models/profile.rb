@@ -15,4 +15,5 @@ class Profile
     property :level,    Integer, :default  => 1
     # Games
     has n,   :games,    :through => Resource
+    has n,   :courses,  :through => Resource
 end

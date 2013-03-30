@@ -5,49 +5,51 @@
   </head>
   <body>
     <%= render("erb", File.read("views/facebody.erb")) %>
-    <%= render("erb", File.read("views/header.erb")) %>    
-    <% if @profile %>
-      <% if @profile.games.empty? %>
-        <% if @games.empty? %>
-          <h1> There are no games in progress yet. </h1>
+    <%= render("erb", File.read("views/header.erb")) %>
+    <div class="wrapper">
+      <% if @profile %>
+        <% if @profile.games.empty? %>
+          <% if @games.empty? %>
+            <h1> There are no games in progress yet. </h1>
+          <% else %>
+            <h1> You are not a part of any game yet. </h1>
+          <% end %>
         <% else %>
-          <h1> You are not a part of any game yet. </h1>
+         <ol id="posts" class="clearfix shadow">
+            <% @profile.games.each do |game| %>
+             <li class="post">
+                <div>
+                  <a href="/game/<%= game['id'] %>"><%= game['name'] %></a>
+                  <%= game['text'] %> "Joined"
+                </div>
+              </li>
+            <% end %>
+          </ol>
         <% end %>
       <% else %>
-       <ol id="posts" class="clearfix shadow">
-          <% @profile.games.each do |game| %>
-           <li class="post">
+        <% if @games.empty? %>
+          <h1> There are no games in progress yet. </h1>
+        <% end %>
+      <% end %>
+
+      <% if !@games.empty? %>
+        <ol id="posts" class="clearfix shadow">
+          <% @games.each do |game| %>
+            <li class="post">
               <div>
                 <a href="/game/<%= game['id'] %>"><%= game['name'] %></a>
-                <%= game['text'] %> "Joined"
+                <%= game['text'] %>
+                <form id="join" method="post" action="/games">
+                  <input type="hidden" name="id" value="<%= game['id'] %>" />
+                  <button type="submit" name="action" value="join">Join</button>
+                </form>
               </div>
             </li>
           <% end %>
         </ol>
       <% end %>
-    <% else %>
-      <% if @games.empty? %>
-        <h1> There are no games in progress yet. </h1>
-      <% end %>
-    <% end %>
 
-    <% if !@games.empty? %>
-      <ol id="posts" class="clearfix shadow">
-        <% @games.each do |game| %>
-          <li class="post">
-            <div>
-              <a href="/game/<%= game['id'] %>"><%= game['name'] %></a>
-              <%= game['text'] %>
-              <form id="join" method="post" action="/games">
-                <input type="hidden" name="id" value="<%= game['id'] %>" />
-                <button type="submit" name="action" value="join">Join</button>
-              </form>
-            </div>
-          </li>
-        <% end %>
-      </ol>
-    <% end %>
-
-    <center><h2><a href="/game/new" style="color:#FFFFFF">[New Game]</a></h2></center>
+      <center><h2><a href="/game/new" style="color:#FFFFFF">[New Game]</a></h2></center>
+    </div>
   </body>
 </html>

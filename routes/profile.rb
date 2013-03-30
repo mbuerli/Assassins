@@ -34,6 +34,53 @@ class Assassins < Sinatra::Application
         end
     end
 
+    get "/profile/schedule" do
+        if session[:access_token]
+            # Get base API Connection
+            @graph  = Koala::Facebook::API.new(session[:access_token])
+            # Get public details of current application
+            @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+            @user = @graph.get_object("me")
+            @profile = Profile.get(@user['id']) || Profile.create(:id => @user['id'], :name => @user['name'])
+
+            erb :schedule
+        else
+            redirect "/"
+        end
+    end
+
+    post "/profile/schedule" do
+        if session[:access_token]
+            # Get base API Connection
+            @graph  = Koala::Facebook::API.new(session[:access_token])
+            # Get public details of current application
+            @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+            @user = @graph.get_object("me")
+            @profile = Profile.get(@user['id']) || Profile.create(:id => @user['id'], :name => @user['name'])
+
+            if params[:action] == 'add'
+                @profile.courses += Course.create(:name => params[:name],
+                                                  :description => params[:description],
+                                                  :location => params[:location],
+                                                  :daysOfWeek => params[:daysOfWeek],
+                                                  :startTime => params[:startTime],
+                                                  :endTime => params[:endTime])
+                @profile.save
+            elsif params[:action][0,6] == 'remove'
+                id = params[:action][6..-1].to_i
+                course = @profile.courses.find{ |c| c.id == id}
+                if course
+                    @profile.courses.delete(course)
+                    @profile.save
+                end
+            end
+
+            redirect "/profile/schedule"
+        else
+            redirect "/"
+        end
+    end
+
     # used by Canvas apps - redirect the POST to be a regular GET
     post "/profile" do
         if params[:action] == 'edit'
