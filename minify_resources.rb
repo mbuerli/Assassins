@@ -12,8 +12,8 @@ module MinifyResources
 	JS_FILES  = File.exists?(JS_LIST) ? IO.read(JS_LIST).scan(/\S+/) : Dir.chdir(JS_DIR){ Dir['*.js'] }
 
 	def self.minify_all
-		require 'jsmin'
-		require 'cssmin'
+		# require 'jsmin'
+		# require 'cssmin'
 		minify( ::JSMin,  JS_DIR,  JS_FILES,  JS_BLOB  )
 		minify( ::CSSMin, CSS_DIR, CSS_FILES, CSS_BLOB )
 	end
