@@ -35,9 +35,6 @@ GEM
       json (~> 1.5.4)
       json_pure (~> 1.5.4)
       multi_json (~> 1.0.3)
-    dm-sqlite-adapter (1.2.0)
-      dm-do-adapter (~> 1.2.0)
-      do_sqlite3 (~> 0.10.6)
     dm-timestamps (1.2.0)
       dm-core (~> 1.2.0)
     dm-transactions (1.2.0)
@@ -52,8 +49,6 @@ GEM
       uuidtools (~> 2.1.2)
     dm-validations (1.2.0)
       dm-core (~> 1.2.0)
-    do_sqlite3 (0.10.11)
-      data_objects (= 0.10.11)
     eventmachine (0.12.10)
     faraday (0.7.6)
       addressable (~> 2.2)
@@ -99,7 +94,6 @@ DEPENDENCIES
   dm-do-adapter
   dm-migrations
   dm-serializer
-  dm-sqlite-adapter
   dm-timestamps
   dm-transactions
   dm-types
