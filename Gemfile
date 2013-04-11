@@ -1,4 +1,5 @@
-source :gemcutter
+source 'http://rubygems.org'
+#:gemcutter
 
 gem "sinatra"
 gem "foreman"
@@ -14,7 +15,7 @@ gem "dm-core"
 gem "dm-do-adapter"
 gem "dm-migrations"
 gem "dm-serializer"
-gem "dm-sqlite-adapter"
+#gem "dm-sqlite-adapter"
 gem "dm-timestamps"
 gem "dm-transactions"
 gem "dm-types"
