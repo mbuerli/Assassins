@@ -1,4 +1,5 @@
-source :gemcutter
+source 'http://rubygems.org'
+#:gemcutter
 
 gem "sinatra"
 gem "foreman"
@@ -6,6 +7,8 @@ gem "koala"
 gem "json"
 gem "httparty"
 gem "thin"
+gem "jsmin"
+gem "cssmin"
 gem "data_mapper"
 gem "data_objects"
 gem "dm-aggregates"
@@ -14,7 +17,8 @@ gem "dm-core"
 gem "dm-do-adapter"
 gem "dm-migrations"
 gem "dm-serializer"
-gem "dm-sqlite-adapter"
+#gem "dm-sqlite-adapter"
+gem "dm-postgres-adapter"
 gem "dm-timestamps"
 gem "dm-transactions"
 gem "dm-types"
