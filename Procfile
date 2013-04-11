@@ -1,1 +1,1 @@
-web: sudo bundle exec thin -R config.ru start -p 80 -e ${RACK_ENV:-development}
+web: sudo bundle exec unicorn -p $PORT -e $RACK_ENV
