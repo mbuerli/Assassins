@@ -10,4 +10,4 @@ require_relative 'course'
 
 DataMapper.finalize
 
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!

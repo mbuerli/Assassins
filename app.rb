@@ -23,17 +23,9 @@ class Assassins < Sinatra::Application
 	configure :development do
 		set :css_files, MinifyResources::CSS_FILES
 		set :js_files,  MinifyResources::JS_FILES
-		# require_relative 'models/migrate'
 	end
 
 	FACEBOOK_SCOPE = 'user_likes,user_photos'
-
-	# before do
-	#   # HTTPS redirect
-	#   if request.scheme != 'https' #settings.environment == :production && 
-	#     redirect "https://#{request.env['HTTP_HOST']}"
-	#   end
-	# end
 
 	helpers do
 		include Rack::Utils
